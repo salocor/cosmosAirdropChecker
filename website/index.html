@@ -177,7 +177,7 @@
                 errorThrown = true;
             }
             var request = "https://airdropbackend.ddns.net/airdrop?address=" + address;
-            var outputFormat = "<table align='center'><tr><th>Project</th><th>Amount</th></tr>";
+            var outputFormat = "<div class='outputTable'><table align='center'><tr><th>Project</th><th>Amount</th></tr>";
             let tempBal;
             
             try{
@@ -198,7 +198,7 @@
                       }
                       outputFormat = outputFormat + "</table>";
                       console.log(outputFormat);
-                      output.innerHTML = outputFormat;
+                      output.innerHTML = outputFormat + "</div>;
                     }
                     else if (errorThrown === false)
                     {
