@@ -231,7 +231,7 @@
                       for (const key in obj)
                       {
                           tempBal = Number(`${obj[key].bal}`)
-                        outputFormat = outputFormat + "<tr><td>" + `${obj[key].name}` + "</td><td>" + tempBal.toFixed(2) + "</td><td><a href='" + `{obj[key].link}` + "' target='_blank'>Claim</a></td></tr>";
+                        outputFormat = outputFormat + "<tr><td>" + `${obj[key].name}` + "</td><td>" + tempBal.toFixed(2) + "</td><td><a href='" + `${obj[key].link}` + "' target='_blank'>Claim</a></td></tr>";
                       }
                       outputFormat = outputFormat + "</table>";
                       console.log(outputFormat);
