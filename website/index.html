@@ -201,6 +201,49 @@
                 margin-left: -250px;
                 text-align: center;
             }
+        /*Mobile styling*/
+            
+        @media only screen and (max-device-width: 480px) {
+            .header
+            {
+                height: 150px;
+            }
+            .title
+            {
+                width: 100%;
+                font-size: 90px;
+                text-align: center;
+            }
+            .addressBox
+            {
+                font-size: 40px;
+                height: 130px;
+            }
+            .submit
+            {
+                height: 130px;
+                font-size: 35px;
+                content: "Go";
+                font-weight: 800;
+            }
+            footer
+            {
+                font-size: 35px;
+            }
+            .logo
+            {
+                width: 0px;
+                height: 0px;
+            }
+            .donateCosmos
+            {
+                font-size: 0px;
+            }
+            th, td
+            {
+                font-size: 50px;
+            }
+        }
         
     </style>
     <script>
@@ -260,7 +303,7 @@
 
     <div class="centered">
         <input id="address" class="addressBox" type=“text” placeholder="cosmos1234...">
-        <button class="submit" type="button" onclick="findMoney();">Find Airdrops</button>
+        <button class="submit" type="button" onclick="findMoney();">Search</button>
     </div>
     <div class ="output" id="output">
 
