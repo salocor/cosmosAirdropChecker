@@ -79,7 +79,6 @@
                 max-width: 600px;
                 height: 80px;
                 border: 1px solid darken(white, 30%);
-                border-radius: 20px 0px 0px 20px;
                 border: none;
                 font-family: courier;
             }
@@ -105,6 +104,21 @@
                 animation-duration: 3s;
                 animation-iteration-count: infinite;
             }
+        
+            .keplr
+                {
+                    background-size: 35px 35px;
+                    border-radius: 20px 0px 0px 20px;
+                    padding:; 15px 25px;
+                    display: inline-block;
+                    width: 150px;
+                    height: 80px;
+                    border: none;
+                    font-size: 22px;
+                    font-weight: 500;
+                    background-color: #1f1f1f;
+                    color: #FFFFFF;
+                }
         
             .title
             {
@@ -253,10 +267,47 @@
                 width: 70px;
                 height: 70px;
             }
+            .keplr
+                {
+                    height: 0px;
+                    width: 0px;
+                }
+                .addressBox
+                {
+                    border-radius: 20px 0px 0px 20px;
+                }
         }
         
     </style>
     <script>
+        const keplrAddress = async () => {
+        if (!window.keplr) {
+            alert("Please install keplr extension");
+        } else {
+            const chainId = "cosmoshub-4";
+    
+            // Enabling before using the Keplr is recommended.
+            // This method will ask the user whether to allow access if they haven't visited this website.
+            // Also, it will request that the user unlock the wallet if the wallet is locked.
+            await window.keplr.enable(chainId);
+        
+            const offlineSigner = window.keplr.getOfflineSigner(chainId);
+        
+            // You can get the address/public keys by `getAccounts` method.
+            // It can return the array of address/public key.
+            // But, currently, Keplr extension manages only one address/public key pair.
+            // XXX: This line is needed to set the sender address for SigningCosmosClient.
+            const accounts = await offlineSigner.getAccounts();
+            console.log(accounts);
+            const addressBox = document.getElementById('address');
+            addressBox.value = accounts[0]["address"];
+            // Initialize the gaia api with the offline signer that is injected by Keplr extension.
+            const cosmJS = new SigningCosmosClient(
+                "https://lcd-cosmoshub.keplr.app",
+                accounts[0].address,
+                offlineSigner,
+            );
+        }
         function precise(x) {
             return x.toPrecision(2);
         }
@@ -312,6 +363,7 @@
     </script>
 
     <div class="centered">
+        <button class="keplr" id="keplr" type="button" onClick="keplrAddress();"><img src="https://assets.website-files.com/61e518f84aa2a6645094f0ad/621751dcf754c13cc0fc0993_Keplr_logo_ver.1.3_Keplr_logo_white-p-800.png" width="123px" height="51px" style="padding-right: 10px;"></button>
         <input id="address" class="addressBox" type=“text” placeholder="cosmos1234...">
         <button class="submit" type="button" onclick="findMoney();">Search</button>
     </div>
