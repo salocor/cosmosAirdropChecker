@@ -179,16 +179,6 @@
                 display: flex;
                 font-size: 170%;
             }
-            .archived
-            {
-                padding-top:50px;
-                position: relative;
-                text-align: left;
-                color: #FFFFFF;
-                justify-content: center;
-                display: flex;
-                font-size: 170%;
-            }
             
             body
             {
@@ -208,12 +198,6 @@
             }
             
             .outputTable
-            {
-                border-radius: 20px 20px 20px 20px;
-                background-color: #1f1f1f;
-            }
-        
-            .archiveTable
             {
                 border-radius: 20px 20px 20px 20px;
                 background-color: #1f1f1f;
@@ -352,7 +336,6 @@
             }
             var request = "https://airdropbackend.ddns.net/airdrop?address=" + address;
             var outputFormat = "<div class='outputTable'><table align='center'><tr><th>Project</th><th>Amount</th><th>Claim</th></tr>";
-            var archiveFormat = "<div class = 'archiveTable'><h3 style='padding-left: 20px;padding-top:10px'>Archived airdrops</h3><table align='center'><tr><th>Project</th><th>Amount</th><th>Claim</th></tr>";
             let tempBal;
             
             try{
@@ -368,22 +351,12 @@
                       const obj = JSON.parse(json);
                       for (const key in obj)
                       {
-                          if (`${obj[key].active}` == "True")
-                        {
-                          tempBal = Number(`${obj[key].bal}`);
-                          outputFormat = outputFormat + "<tr><td>" + `${obj[key].name}` + "</td><td>" + tempBal.toFixed(2) + "</td><td><a href='" + `${obj[key].link}` + "' target='_blank'>Claim</a></td></tr>";
-                        }
-                        else
-                        {
-                            tempBal = Number(`${obj[key].bal}`);
-                            archiveFormat = archiveFormat + "<tr><td>" + `${obj[key].name}` + "</td><td>" + tempBal.toFixed(2) + "</td><td><a href='" + `${obj[key].link}` + "' target='_blank'>Claim</a></td></tr>";
-                        }
+                          tempBal = Number(`${obj[key].bal}`)
+                        outputFormat = outputFormat + "<tr><td>" + `${obj[key].name}` + "</td><td>" + tempBal.toFixed(2) + "</td><td><a href='" + `${obj[key].link}` + "' target='_blank'>Claim</a></td></tr>";
                       }
-                      archiveFormat = archiveFormat + "</table>";
                       outputFormat = outputFormat + "</table>";
                       console.log(outputFormat);
                       output.innerHTML = outputFormat + "</div>";
-                      archive.innerHTML = archiveFormat + "</table>";
                     }
                     else if (errorThrown === false)
                     {
@@ -405,9 +378,6 @@
     </div>
     <div class ="output" id="output">
 
-    </div>
-    <div class="archive" id="archive">
-        
     </div>
     <a href="https://twitter.com/AirdropFinder_" target="_new">
         <img class="social" src="assets/twitter.png" href="https://twitter.com/AirdropFinder_" width="32px" height="32px">
