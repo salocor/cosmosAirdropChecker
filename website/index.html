@@ -368,7 +368,7 @@
                       const obj = JSON.parse(json);
                       for (const key in obj)
                       {
-                          if (`${obj[key].active}`)
+                          if (`${obj[key].active}` == "True")
                         {
                           tempBal = Number(`${obj[key].bal}`);
                           outputFormat = outputFormat + "<tr><td>" + `${obj[key].name}` + "</td><td>" + tempBal.toFixed(2) + "</td><td><a href='" + `${obj[key].link}` + "' target='_blank'>Claim</a></td></tr>";
